@@ -2,7 +2,7 @@ import { db } from "@/app/api/db";
 import { MessageRow } from "@/app/api/model";
 
 const QUERY = "SELECT * FROM MESSAGE WHERE ID = 1";
-
+//
 export async function fetchData(): Promise<MessageRow> {
   const row = await db.get<MessageRow>(QUERY);
   return row;

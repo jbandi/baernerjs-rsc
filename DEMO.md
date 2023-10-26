@@ -1,4 +1,20 @@
+### Preparation:
+
+Prepare for initial client-side rendering:
+
+- `page.tsx` -> `import { PageLayout } from "@/app/ClientPageLayout";`
+- `api/fetchData.ts` -> comment in initial demo code / comment out db access
+
+=> Test that `HelloWorld.tsx` is rendering client side ...
+
+
+
 # React is Easy
+
+- Show HelloWorld component
+- Show that JS for rendering is sent to the client 
+
+
 
 You want data:
 
@@ -32,19 +48,22 @@ useEffect(() => {
 
 -> same in Angular or Vue ... same with RxJS ...
 
-Secretly switch import of `PageLayout`in `page.tsx` and implementation in `fetchData.ts`...
+**Secretly switch import of `PageLayout`in `page.tsx` and implementation in `fetchData.ts`...**
 
-What if I told you everything you know to be true is wrong?
+What if I told you everything you know about Frontend Development is wrong?
 
 ```typescript
   const data = await fetchData();
 ```
 
--> async component
+-> `async`component
 
 
 
-- Show `fetchData`
+### Thou shalt build APIs
+
+- Show DB, change Record in DB, Reload Frontend
+- Show `fetchData`  -> No API! Just a function call ...
 - Show that JS for rendering is not even sent to the client (difference to traditional SSR).
 
 
@@ -59,6 +78,7 @@ Extend `HelloWorld.tsx`
 
 - Show Interactivity
 - Show rendering code is loaded in the client - add log statement
+- **Show passing pros === passing data from server to client**
 
 
 
@@ -67,8 +87,8 @@ Extend `HelloWorld.tsx`
 Extend `FormDemo.tsx`
 
 ```ts
-  async function handleSubmit() {
-    await myAction(message);
+  function handleSubmit() {
+    myAction(message);
   }
 ```
 
@@ -92,22 +112,47 @@ Extend `HelloWorld.tsx`
 
 
 
+- UI does not refresh ...
+
+  
+
 Refreshing the UI:
 
-```
+```typescript
 import { useRouter } from "next/navigation";
 let router = useRouter();
-router.refresh();
+
+async function handleSubmit() {
+  await myAction(message);
+}
 ```
 
-Better:
+- it is still a SPA => fine-grained DOM Manipulation
+- show RSC Payload in POST-GET Calls
+
+Even better:
 
 In `action.ts`
 
-```
- revalidatePath("/");
+```typescript
+revalidatePath("/");
 ```
 
-
+- POST returns RSC Payload
 
 # Chart Demo
+
+Extend `HelloWorld.tsx`
+
+```
+  <ChartDemo />
+```
+
+- Schow `node_modules/d3` and `node_modules/date-fns` are in the `page.js` bundle.
+  => Client Component
+
+
+
+Remove `'use client'` from `HelloWorld.tsx`
+
+- D3 and date-fns is not in the bundel any more!

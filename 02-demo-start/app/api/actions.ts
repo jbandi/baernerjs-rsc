@@ -11,6 +11,6 @@ export async function myAction(newValue: string) {
 
   await db.run(`insert into message(text) values ('${newValue}');`);
   const rows = await db.all<MessageRow>("SELECT * FROM MESSAGE");
-  console.log("DB", rows);
+  console.log("Values in DB", rows);
   revalidatePath("/");
 }
