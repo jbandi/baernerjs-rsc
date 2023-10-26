@@ -1,10 +1,5 @@
 import { AsyncDatabase } from "promised-sqlite3";
 
-export type MessageRow = {
-  id: number;
-  text: string;
-};
-
 // export const db = new Database("./db/db.sqlite");
 // export const query = promisify<string, MessageRow>(db.get.bind(db));
 

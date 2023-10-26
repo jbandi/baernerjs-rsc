@@ -1,6 +1,5 @@
 "use client";
 import { ChangeEvent, useState } from "react";
-import { useFormState, useFormStatus } from "react-dom";
 import { myAction } from "@/app/api/actions";
 import { useRouter } from "next/navigation";
 
@@ -9,18 +8,19 @@ type FormProps = {
 };
 
 export function FormDemo({ initalMessage }: FormProps) {
+  const router = useRouter();
   const [message, setMessage] = useState(initalMessage);
-  let router = useRouter();
 
   function handleMessageChange(e: ChangeEvent<HTMLInputElement>) {
     setMessage(e.target.value);
   }
-
   async function handleSubmit() {
+    console.log("Submitting message", message);
     await myAction(message);
-    router.refresh();
+    // router.refresh();
   }
 
+  console.log("Rendering FormDemo with message", message);
   return (
     <div className="m-3 flex min-w-full flex-col gap-5 border-4 border-pink-500 p-5">
       <h1 className="font-bold">Form Demo</h1>
